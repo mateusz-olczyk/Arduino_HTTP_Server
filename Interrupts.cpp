@@ -10,7 +10,7 @@ void timer1_init() {
 //  OCR1A = 62500/DESIRED_HZ-1; // = (ARDUINO_HZ = 16*10^6) / ( DESIRED_HZ * 256) - 1
   OCR1A = 62.5*MILLIS_PERIOD-1;
   TCCR1B = _BV(WGM12);  // turn on CTC mode and timer stopped
-  TIMSK1 |= (1 << OCIE1A); // enable timer compare interrupt
+  TIMSK1 |= _BV(OCIE1A); // enable timer compare interrupt
 }
 
 void timer1_start() {
