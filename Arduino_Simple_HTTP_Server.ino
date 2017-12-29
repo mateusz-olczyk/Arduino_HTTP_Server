@@ -2,7 +2,7 @@
 #include "Interrupts.h"
 #include "DataBuffer.h"
 DataBuffer dataBuffer;
-const double INCREMENT_VALUE = 1.0;
+double INCREMENT_VALUE = 1.0;
 double currentValue = 0.0;
 
 // Enter a MAC address and IP address for your controller below.
