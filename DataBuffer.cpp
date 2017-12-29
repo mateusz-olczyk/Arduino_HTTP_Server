@@ -11,10 +11,11 @@ void DataBuffer::add(DataObject obj) {
 }
 
 void DataBuffer::print(EthernetClient & client) {
+  double currentTime = (double) millis() / 1000;
   for (int i = 0; i < current_size; i++) {
     int index = (data_begin + i) % MAX_SIZE;
     client.print("{ x: ");
-    client.print(data[index].x);
+    client.print(currentTime - data[index].x);
     client.print(", y: ");
     client.print(data[index].y);
     client.print("}, ");
