@@ -1,8 +1,8 @@
 const PROGMEM char prgstrHTTPHeader[] = "HTTP/1.1 200 OK\nContent-Type: text/html\nConnection: close\nRefresh: 150\n\n";
-const PROGMEM int maxIncrementValueSize = 10;
+const int maxIncrementValueSize = 10;
 const char newIncValueRequest[] = "NEW_LITRES_VALUE";
-const PROGMEM int newIncValueRequestSize = 16;
-const PROGMEM int maxHeaderSize = 6 + newIncValueRequestSize + maxIncrementValueSize; 
+const int newIncValueRequestSize = 16;
+const int maxHeaderSize = 6 + newIncValueRequestSize + maxIncrementValueSize; 
 const PROGMEM char prgstrPageBegin[] = "<!doctype html>\n<html>\n<head>\n<title>Scatter Chart</title>\n<script src=\"http://www.chartjs.org/dist/2.7.1/Chart.bundle.js\"></script>\n<style>\ncanvas{\n-moz-user-select: none;\n-webkit-user-select: none;\n-ms-user-select: none;\n}\ndiv{\nwidth: 50%;\nmargin: 0 auto;\n}\n</style>\n<script>function sendLitresAmount() {\nvar request = new XMLHttpRequest();\nvar counter_litres = document.getElementById(\"counter_litres_input\").value;\nrequest.open(\"POST\", \"NEW_LITRES_VALUE\" + counter_litres, true);\nrequest.send(counter_litres);\ndocument.getElementById(\"counter_litres_input\").value=\"\";}\n</script>\n</head>\n<body>\n<div style=\"width:75%;\">\n<canvas id=\"canvas\"></canvas>\n<div><p>Liczba litrow na pojedynczy sygnal: <input type=\"text\" id=\"counter_litres_input\"><button type=\"button\" onclick=\"sendLitresAmount()\">Wyslij</button></p></div>\n<script>\nvar config = {\ntype: \"scatter\",\ndata: {\ndatasets: [{\nbackgroundColor: \"#1b5df6\",\nborderColor: \"#1b5df6\",\nshowLine: true,\ndata: [";
 const PROGMEM char prgstrPageEnd[] = "],\nfill: false\n}]\n},\noptions: {\nresponsive: true,\nlegend: {\ndisplay: false\n},\nanimation: {\nduration: 0\n},\nresponsiveAnimationDuration: 0,\ntitle:{\ndisplay:true,\ntext:'Chart.js Scatter Chart with lines'\n},\nscales: {\nxAxes: [{\nticks: { reverse: true\n},\nscaleLabel: {\ndisplay: true,\nlabelString: 'seconds'\n}\n}],\nyAxes: [{\nscaleLabel: {\ndisplay: true,\nlabelString: 'value'\n}\n}]\n}\n}\n};\nwindow.onload = function() {\nvar ctx = document.getElementById(\"canvas\").getContext(\"2d\");\nwindow.myLine = new Chart(ctx, config);\n};\n</script>\n</body>\n</html>";
 
@@ -11,7 +11,7 @@ extern double INCREMENT_VALUE;
 
 char newIncrementValue[maxIncrementValueSize] = {"0"};
 
-void printProgmemString(EthernetClient & client, const PROGMEM char string[]) {
+void printProgmemString(EthernetClient & client, const char string[]) {
   for (int i = 0; i < strlen_P(string); i++)
     client.write(pgm_read_byte_near(string + i));
 }
