@@ -5,7 +5,7 @@
 struct DataObject {
   double x;
   double y;
-  DataObject() {}
+  DataObject() = default;
   DataObject(double x, double y) {
     this->x = x;
     this->y = y;
@@ -22,6 +22,7 @@ private:
 
 public:
   void add(DataObject);
+  double linearRegression(); 
   void print(EthernetClient &);
 
 };
